@@ -41,17 +41,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // URLs
-app.get('/', function(req, res){
+app.get('*', function(req, res){
 	res.status(200).sendFile(path.join(__dirname + "/index.html"));
 });
 
 app.listen('3000', function(){
 	console.log('Express works on 3000 port');
 });
-
-
-//API
-
-app.post("/saveuser", function(req, res){
-
-})
