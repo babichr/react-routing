@@ -48,3 +48,10 @@ app.get('*', function(req, res){
 app.listen('3000', function(){
 	console.log('Express works on 3000 port');
 });
+
+
+//API
+
+app.post("/saveuser", function(req, res){
+	res.status(200).sendFile(path.join(__dirname + "/index.html"));
+})
