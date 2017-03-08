@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var mongo = require("mongo");
 var Promise = require('mpromise');
-
+var User = require("./models/user");
 
 // Webpack + Express
 var webpack = require("webpack");
@@ -23,11 +23,11 @@ app.use(webpackHotMiddleware(compiler));
 
 
 //DB connection
-// mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/app');
 var db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function(){});
+mongoose.Promise = global.Promise;
 
 //Favicon
 app.use(favicon(__dirname + '/static/favicon.ico'));
@@ -52,6 +52,29 @@ app.listen('3000', function(){
 
 //API
 
-app.post("/saveuser", function(req, res){
-	res.status(200).sendFile(path.join(__dirname + "/index.html"));
+app.post("/api/create-user", function(req, res, data){
+	var userLogin = req.body.login;
+	var userEmail = req.body.email;
+	var userPassword = req.body.password;
+	var newUser = new User({
+		login: userLogin,
+		email: userEmail,
+		password: userPassword,
+		date: new Date()
+	})
+
+	newUser.save(function(err, data){
+		if (!err) {
+			res.send("succses");
+		}else {
+			res.send("error");
+			return err
+		}
+	});
+	
+
+
+	res.status(200);
 })
+
+

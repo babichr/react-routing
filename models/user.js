@@ -1,14 +1,22 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb:localhost/app')
+var mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
-	name: String,
-	id: Number,
-	email: String,
-	password: String,
-	data: Date.now(),
+var userSchema = mongoose.Schema({
+	login: {
+		type:  String,
+		required: true
+	},
+	email: {
+		type: String,
+		required: true
+	},
+	password: {
+		type: String,
+		required: true
+	},
+	date: {
+		type: String
+	}
 });
 
-exports.User = mangoose.model('user', userSchema)
-
-
+var User = mongoose.model('user', userSchema);
+module.exports = User;

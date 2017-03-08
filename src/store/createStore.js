@@ -5,20 +5,19 @@ import { reducer as formReducer } from 'redux-form';
 
 const logger = createLogger();
 
-
 const initialState = {};
 
 const makeRootReduces = ( asyncReducers ) => {
-    return combineReducers({
-        form: formReducer
-    })
+	return combineReducers({
+		form: formReducer
+	})
 };
 
 export const store = createStore(
-    makeRootReduces(),
-    initialState,
-    applyMiddleware(
-        thunk,
-        logger
-    )
+	makeRootReduces(),
+	initialState,
+	applyMiddleware(
+		thunk,
+		logger
+	)
 );

@@ -21,6 +21,7 @@ const App  = () => {
 					<Route component={ Main }>
 						<Route path="/" component={ Home } />
 						<Route path="/login" component={ Login } />
+						<Route path="/create-user" component={ Login } />
 						<Route path="*" component={ ErrorPage } />
 					</Route>
 				</Router>
