@@ -1,7 +1,6 @@
-var path = require('path');
-var webpack = require("webpack");
-var webpackConfig = require("./webpack.config.js");
-var webpack = require("webpack");
+import path from "path";
+import webpack from "webpack";
+
 
 module.exports = {
 	entry: ['./src/index.js', 'webpack-hot-middleware/client?reload=true'],

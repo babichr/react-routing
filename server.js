@@ -1,30 +1,30 @@
-var express = require('express');
-var app = express();
-var favicon = require('serve-favicon');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var mongo = require('mongo');
-var mongoose = require('mongoose');
-var path = require('path');
-var mongo = require("mongo");
-var Promise = require('mpromise');
-var User = require("./models/user");
+import express from "express";
+import favicon from "serve-favicon";
+import morgan  from "morgan";
+import bodyParser from "body-parser";
+import mongo from "mongo";
+import Promise from "mpromise";
+import mongoose from "mongoose";
+import path from "path";
+import { User } from "./models/models";
+
 
 // Webpack + Express
-var webpack = require("webpack");
-var webpackConfig = require("./webpack.config.js");
-var webpackDevServer = require('webpack-dev-server');
-var webpackDevMiddleware = require("webpack-dev-middleware");
-var webpackHotMiddleware = require("webpack-hot-middleware");
-var app = express();
-var compiler = webpack(webpackConfig);
+import webpack  from "webpack";
+import webpackConfig  from "./webpack.config.js";
+import webpackDevServer  from 'webpack-dev-server';
+import webpackDevMiddleware  from "webpack-dev-middleware";
+import webpackHotMiddleware  from "webpack-hot-middleware";
+
+const app = express();
+const compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler));
 app.use(webpackHotMiddleware(compiler));
 
 
 //DB connection
 mongoose.connect('mongodb://localhost:27017/app');
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function(){});
 mongoose.Promise = global.Promise;
@@ -53,10 +53,10 @@ app.listen('3000', function(){
 //API
 
 app.post("/api/create-user", function(req, res, data){
-	var userLogin = req.body.login;
-	var userEmail = req.body.email;
-	var userPassword = req.body.password;
-	var newUser = new User({
+	const userLogin = req.body.login;
+	const userEmail = req.body.email;
+	const userPassword = req.body.password;
+	const newUser = new User({
 		login: userLogin,
 		email: userEmail,
 		password: userPassword,

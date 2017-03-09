@@ -9,7 +9,6 @@ class Login extends React.Component{
 
 	render(){
 
-
 		const { hendleSubmit, loginForm, onSubmit } = this.props;
 
 		return(

@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 var userSchema = mongoose.Schema({
 	login: {
@@ -18,5 +18,4 @@ var userSchema = mongoose.Schema({
 	}
 });
 
-var User = mongoose.model('user', userSchema);
-module.exports = User;
+export const User = mongoose.model('user', userSchema);
