@@ -7,6 +7,7 @@ import Users from "./components/Users";
 import Login from  "./components/Login";
 import Home from "./components/Home";
 import Main from "./components/Main";
+import UserPage from "./components/UserPage";
 import ErrorPage from "./components/ErrorPage";
 
 
@@ -20,6 +21,7 @@ const App  = () => {
 						<Route path="/login" component={ Login } />
 						<Route path="/create-user" component={ Login } />
 						<Route path="/users" component={ Users } />
+                        <Route path="/user/:id" component={ UserPage } />
 						<Route path="*" component={ ErrorPage } />
 					</Route>
 				</Router>

@@ -26,7 +26,7 @@ app.use(webpackHotMiddleware(compiler));
 mongoose.connect('mongodb://localhost:27017/app');
 const db = mongoose.connection;
 db.on('error', console.error);
-db.once('open', function(){});
+db.once('open', () => {});
 mongoose.Promise = global.Promise;
 
 //Favicon
@@ -39,12 +39,12 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.listen('3000', function(){
+app.listen('3000', () => {
 	console.log('Express works on 3000 port');
 });
 
 //API
-app.post("/api/create-user", function(req, res){
+app.post("/api/create-user", (req, res) => {
 	const userLogin = req.body.login;
 	const userEmail = req.body.email;
 	const userPassword = req.body.password;
@@ -55,21 +55,23 @@ app.post("/api/create-user", function(req, res){
 		date: new Date()
 	});
 
-	newUser.save(function(err){
+	newUser.save( (err) => {
 		if (!err) {
 			res.send("succses");
 		}else {
 			res.send("error");
 			return err
 		}
-
 	});
-
     res.status(200);
 });
 
-app.get("/api/users-list", function( req, res ){
-        db.collection("users").find({}).toArray(function(err, user) {
+app.get( "user/:uid", ( req, res ) => {
+
+});
+
+app.get("/api/users-list", ( req, res ) => {
+        db.collection("users").find({}).toArray( (err, user) => {
             if (err) {
                 handleError(res, err.message, "Failed to get contacts.");
             } else {
@@ -80,7 +82,7 @@ app.get("/api/users-list", function( req, res ){
 
 
 // URLs
-app.get('*', function(req, res){
+app.get('*', (req, res) => {
     res.status(200).sendFile(path.join(__dirname + "/index.html"));
 });
 

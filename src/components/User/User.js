@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 class User extends React.Component{
     render(){
@@ -6,7 +7,7 @@ class User extends React.Component{
         const { data } = this.props;
 
         return(
-            <a href={`/user/${data._id}`} style={ {"display": "block"} } className="user well">
+            <Link to={`/user/${data._id}`} style={ {"display": "block"} } className="user well">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="user__id">
@@ -35,7 +36,7 @@ class User extends React.Component{
                         </div>
                     </div>
                 </div>
-            </a>
+            </Link>
         )
     }
 }
