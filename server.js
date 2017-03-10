@@ -11,7 +11,7 @@ import { User } from "./models/models";
 
 // Webpack + Express
 import webpack  from "webpack";
-import webpackConfig  from "./webpack.config.js";
+import { webpackConfig }  from "./webpack.config.js";
 import webpackDevServer  from 'webpack-dev-server';
 import webpackDevMiddleware  from "webpack-dev-middleware";
 import webpackHotMiddleware  from "webpack-hot-middleware";
@@ -39,20 +39,12 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
-// URLs
-app.get('*', function(req, res){
-	res.status(200).sendFile(path.join(__dirname + "/index.html"));
-});
-
 app.listen('3000', function(){
 	console.log('Express works on 3000 port');
 });
 
-
 //API
-
-app.post("/api/create-user", function(req, res, data){
+app.post("/api/create-user", function(req, res){
 	const userLogin = req.body.login;
 	const userEmail = req.body.email;
 	const userPassword = req.body.password;
@@ -61,20 +53,37 @@ app.post("/api/create-user", function(req, res, data){
 		email: userEmail,
 		password: userPassword,
 		date: new Date()
-	})
+	});
 
-	newUser.save(function(err, data){
+	newUser.save(function(err){
 		if (!err) {
 			res.send("succses");
 		}else {
 			res.send("error");
 			return err
 		}
+
 	});
-	
+
+    res.status(200);
+});
+
+app.get("/api/users-list", function( req, res ){
+        db.collection("users").find({}).toArray(function(err, user) {
+            if (err) {
+                handleError(res, err.message, "Failed to get contacts.");
+            } else {
+                res.status(200).json(user);
+            }
+    });
+});
 
 
-	res.status(200);
-})
+// URLs
+app.get('*', function(req, res){
+    res.status(200).sendFile(path.join(__dirname + "/index.html"));
+});
+
+
 
 

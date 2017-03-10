@@ -7,4 +7,8 @@ export const HeaderData = [
 		name: "Login",
 		href: "/login"
 	},
+	{
+		name: "Users",
+		href: "/users"
+	},
 ]

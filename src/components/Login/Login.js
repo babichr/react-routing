@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-// import { Field , reduxForm }  from "redux-form";
 import { getLoginData } from "../../actions/actions";
 import { Form, Text } from "react-form";
 
@@ -9,7 +8,7 @@ class Login extends React.Component{
 
 	render(){
 
-		const { hendleSubmit, loginForm, onSubmit } = this.props;
+		const { hendleSubmit } = this.props;
 
 		return(
 			<section className="login">

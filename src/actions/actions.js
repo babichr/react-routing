@@ -1,6 +1,7 @@
 import axios from "axios";
 const GET_FORM_VALUE = "GET_FORM_VALUE";
 const SAVE_USER = "SAVE_USER";
+const GET_USERS = "GET_USERS";
 
 
 export const getLoginData = ( values ) => {
@@ -12,7 +13,19 @@ export const getLoginData = ( values ) => {
 					payload: response.data
 				});
 			})
-			.catch(response => dispatch(errorHandler(response.data.error)))
+			.catch(response => console.log(response.data.error))
 	}
+};
 
-}
+export const getUsers = () => {
+    return function (dispatch) {
+        axios.get("api/users-list")
+            .then( response =>{
+                    dispatch({
+                        type: GET_USERS,
+                        payload: response.data
+                    });
+            })
+            .catch( response => console.log(response.data) )
+    }
+};

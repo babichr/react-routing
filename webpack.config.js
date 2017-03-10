@@ -2,7 +2,7 @@ import path from "path";
 import webpack from "webpack";
 
 
-module.exports = {
+export const webpackConfig = {
 	entry: ['./src/index.js', 'webpack-hot-middleware/client?reload=true'],
 	output: {
 		filename: 'build.js',
