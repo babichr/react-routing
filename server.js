@@ -3,6 +3,7 @@ import favicon from "serve-favicon";
 import morgan  from "morgan";
 import bodyParser from "body-parser";
 import mongo from "mongo";
+import mongodb from "mongodb";
 import Promise from "mpromise";
 import mongoose from "mongoose";
 import path from "path";
@@ -18,6 +19,7 @@ import webpackHotMiddleware  from "webpack-hot-middleware";
 
 const app = express();
 const compiler = webpack(webpackConfig);
+const ObjectID = mongodb.ObjectID;
 app.use(webpackDevMiddleware(compiler));
 app.use(webpackHotMiddleware(compiler));
 
@@ -66,8 +68,16 @@ app.post("/api/create-user", (req, res) => {
     res.status(200);
 });
 
-app.get( "user/:uid", ( req, res ) => {
-
+app.get( "/api/current-user/:uid", ( req, res ) => {
+    let uid = req.params.uid;
+    db.collection("users").findOne({ _id : new ObjectID(uid) }, ( err, user ) => {
+        if ( err ){
+            console.log("errorR: " + err);
+            res.send(err);
+        }else{
+            res.status(200).json(user)
+        }
+    })
 });
 
 app.get("/api/users-list", ( req, res ) => {
@@ -78,6 +88,10 @@ app.get("/api/users-list", ( req, res ) => {
                 res.status(200).json(user);
             }
     });
+});
+
+app.get( "/error", ( req, res ) => {
+    res.status(404);
 });
 
 
