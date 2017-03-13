@@ -59,10 +59,9 @@ app.post("/api/create-user", (req, res) => {
 
 	newUser.save( (err) => {
 		if (!err) {
-			res.send("succses");
+			res.send({ type: "alert-success" , message: `Thank you for registration ` });
 		}else {
-			res.send("error");
-			return err
+		    res.send({ type: "alert-danger", message:`Login or email is already used` });
 		}
 	});
     res.status(200);

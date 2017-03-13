@@ -4,7 +4,14 @@ const GET_FORM_VALUE = "GET_FORM_VALUE";
 const SAVE_USER = "SAVE_USER";
 const GET_USERS = "GET_USERS";
 const GET_USER = "GET_USER";
+const CLOSE_MESSAGE = "CLOSE_MESSAGE";
 
+export const removeMessage = ( ) => {
+    return {
+        type: CLOSE_MESSAGE,
+        payload: {},
+    }
+};
 
 export const getLoginData = ( values ) => {
 	return function(dispatch) {

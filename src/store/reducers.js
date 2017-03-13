@@ -1,7 +1,9 @@
-export const newUser = ( status, action ) => {
+export const newUserResponse = ( status={}, action ) => {
 	switch( action.type ){
 		case "SAVE_USER": 
 			return action.payload;
+        case "CLOSE_MESSAGE":
+            return action.payload;
 		default:
 			return status
 	}

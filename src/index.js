@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Main from "./components/Main";
 import UserPage from "./components/UserPage";
 import ErrorPage from "./components/ErrorPage";
+import "./styles/styles.styl";
 
 
 const App  = () => {
