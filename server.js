@@ -59,12 +59,23 @@ app.post("/api/create-user", (req, res) => {
 
 	newUser.save( (err) => {
 		if (!err) {
-			res.send({ type: "alert-success" , message: `Thank you for registration ` });
+			res.send({ type: "alert-success" , message: `Thank you for registration `, valid: true });
 		}else {
-		    res.send({ type: "alert-danger", message:`Login or email is already used` });
+		    res.send({ type: "alert-danger", message:`Login or email is already used`, valid: false });
 		}
 	});
     res.status(200);
+});
+
+app.delete( "/api/remove-user/:uid",  (req, res) => {
+    let uid = req.params.uid;
+    db.collection("users").deleteOne({ _id: new ObjectID(uid) }, (err, user) => {
+        if (err) {
+            res.send(res, err.message, "Failed to delete contact");
+        } else {
+            res.status(200).json(req.params.id);
+        }
+    });
 });
 
 app.get( "/api/current-user/:uid", ( req, res ) => {
@@ -90,7 +101,7 @@ app.get("/api/users-list", ( req, res ) => {
 });
 
 app.get( "/error", ( req, res ) => {
-    res.status(404);
+    res.status(404).end();
 });
 
 

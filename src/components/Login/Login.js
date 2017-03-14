@@ -15,7 +15,7 @@ class Login extends React.Component{
 				<div className="container">
 					<div className="row">
 						<div className="col-md-4 col-md-offset-4">
-							<Form onSubmit={(values) => { hendleSubmit(values) }}  validate = { values => { const { login, email, password } = values;
+							<Form onSubmit={ (values) => { hendleSubmit(values) }}   validate = { values => { const { login, email, password } = values;
 								    return {
                                         login: !login ? " Login is required " : undefined,
                                         email: !email ? " Email is required " : undefined,
@@ -23,9 +23,9 @@ class Login extends React.Component{
                                     }
 							    }
 							} >
-								{({ submitForm }) => {
+								{({ submitForm, resetForm }) => {
 									return (
-										<form className="form-group" onSubmit={ submitForm }>
+										<form className="form-group" onSubmit={ (e) => { e.preventDefault(); submitForm(); resetForm(); } }>
 											<h3> Registration </h3>
 											<div className="form-group">
 												<label>Login</label>

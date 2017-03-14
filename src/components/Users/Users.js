@@ -2,6 +2,7 @@ import React from "react";
 import User from "../User/User";
 import { getUsers } from "../../actions/actions";
 import { connect } from "react-redux";
+import Search from "../Search/Search"
 
 class Users extends React.Component{
 
@@ -18,6 +19,7 @@ class Users extends React.Component{
                     <div className="container">
                         <div className="row">
                             <div className="col-md-4 col-md-offset-4">
+                                <Search />
                                 {
                                     users.map( (item, i) => {
                                         return(

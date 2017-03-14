@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router";
 import { getUserData } from "../../actions/actions";
 
 class UserPage extends React.Component{
@@ -18,6 +19,7 @@ class UserPage extends React.Component{
                            <div className="row">
                                <div className="col-md-4 col-md-offset-4">
                                    <h4>Hello  { user.login } </h4>
+                                   <Link to="/users">Back to users</Link>
                                </div>
                            </div>
                        </div>

@@ -5,12 +5,24 @@ const SAVE_USER = "SAVE_USER";
 const GET_USERS = "GET_USERS";
 const GET_USER = "GET_USER";
 const CLOSE_MESSAGE = "CLOSE_MESSAGE";
+const REMOVE_USER = "REMOVE_USER";
 
 export const removeMessage = ( ) => {
     return {
         type: CLOSE_MESSAGE,
         payload: {},
     }
+};
+
+export const removeUser = ( id ) => {
+  return ( dispatch ) => {
+      axios.delete( `api/remove-user/${id}` )
+          .then( response => {
+              dispatch(getUsers())
+          })
+          .catch( response => console.log( response.data.error ) )
+  }
+
 };
 
 export const getLoginData = ( values ) => {
@@ -48,6 +60,6 @@ export const getUserData = ( id ) => {
                         payload: response.data
                     })
             })
-            .catch( (response) => { browserHistory.push('/error'),   console.log("erro: " + response.data)  })
+            .catch( (response) => { browserHistory.push('/error');   console.log("erro: " + response.data)  })
     }
 };
